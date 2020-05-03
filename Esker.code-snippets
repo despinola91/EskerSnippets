@@ -15,46 +15,66 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-
-	"Loop de productos lado del servidor": 
+	
+	///////* Looping form table controls *///////
+	"SOP - Looping materials on server side": 
 	{
-		"description": "Testing a for loop.",
-		"prefix": ["for", "for-const"],
-		"body": ["for (const ${2:element} of ${1:array}) {", "\t$0", "}"]
-	},
-
-	"Loop de productos lado del cliente": 
-	{
-		"prefix": ["for", "for-const"],
-		"body": ["for (const ${2:element} of ${1:array}) {", "\t$0", "}"],
-		"description": "Testing a for loop."
-	},
-
-	"Loop de items lado del server":
-	{
-		"description": "Looping line items server side",
-		"prefix": ["loop","query","server query"],
+		"description": "Looping materials on server side",
+		"prefix": ["for","loop","query","server query", "esker"],
 		"body": [
-			"var lineItemsTable = Data.GetTable(\"LineItems__\");",
-			"var itemCount = lineItemsTable.GetItemCount();\n",
-			"for ( var i = 0; i < itemCount; i++ )",
+			"var materialsTable = Data.GetTable(\"Product_List__\");",
+			"var itemCount = materialsTable.GetItemCount();\n",
+			"for (var i = 0; i < itemCount; i++)",
 			"{",
-			"\t$0var item = lineItemsTable.GetItem(i);",
-			"\tvar ${1:field} = lineItem.GetValue(${1:field});",
+			"\t$0var item = materialsTable.GetItem(i);",
+			"\tvar ${1:field} = item.GetValue(${1:field});",
 			"\titem.SetValue(\"${2:field}\", ${3:value});",
 			"}"
 		]
 	},
 
-	"Loop de items lado del cliente": 
+	"SOP - Looping materials on client side": 
 	{
-		"description": "Looping line items client side",
-		"prefix": ["loop","query","client query"],
+		"description": "Looping materials on client side",
+		"prefix": ["for","loop","query","client query", "esker"],
 		"body": [
-			"for (var i = 0; i < Controls.LineItems__.GetItemCount(); i++)",
+			"var itemCount = Controls.Product_List__.GetItemCount();",
+			"for (var i = 0; i < itemCount; i++)",
+			"{",
+			"\t$0var item = Controls.Product_List__.GetItem(i);",
+			"\tvar ${1:field} = item.GetValue(\"${1:field}\");",
+			"\tvar ${2:field} = item.SetValue(\"${2:field}\");",
+			"}"
+		]
+	},
+
+	"AP - Looping items on server side":
+	{
+		"description": "Looping line items on server side",
+		"prefix": ["for","loop","query","server query", "esker"],
+		"body": [
+			"var lineItemsTable = Data.GetTable(\"LineItems__\");",
+			"var itemCount = lineItemsTable.GetItemCount();\n",
+			"for (var i = 0; i < itemCount; i++)",
+			"{",
+			"\t$0var item = lineItemsTable.GetItem(i);",
+			"\tvar ${1:field} = item.GetValue(${1:field});",
+			"\titem.SetValue(\"${2:field}\", ${3:value});",
+			"}"
+		]
+	},
+
+	"AP - Looping items on client side": 
+	{
+		"description": "Looping line items on client side",
+		"prefix": ["for","loop","query","client query", "esker"],
+		"body": [
+			"var itemCount = Controls.LineItems__.GetItemCount();",
+			"for (var i = 0; i < itemCount; i++)",
 			"{",
 			"\t$0var item = Controls.LineItems__.GetItem(i);",
 			"\tvar ${1:field} = item.GetValue(\"${1:field}\");",
+			"\tvar ${2:field} = item.SetValue(\"${2:field}\");",
 			"}"
 		]
 	},
