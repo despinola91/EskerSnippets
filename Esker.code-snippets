@@ -119,59 +119,51 @@
 		]
 	},
 	
-	Sys.Helpers.Database.AddOrModifyTableRecord (table, filter, attributes)
-	
-	var filter = "(&(Z_CUITEmisor__=" + ObjResponse.CUITEmisor + ")(Z_codTipoCmp__="+ ObjResponse.codTipoCmp +")(Z_nroComp__=" + nroComp + ")(Z_ptoVta__=" + ptoVta + "))";
-                                var attributes = [
-                                    { "name": "CompanyCode__", "value": mappedValue.companyCode },
-                                    { "name": "FormField__", "value": mappedValue.formField },
-                                    { "name": "ExtractedValue__", "value": mappedValue.extractedValue },
-                                    { "name": "BusinessValue__", "value": mappedValue.businessValue }
-                                ];
-								Sys.Helpers.Database.AddOrModifyTableRecord(CrossReference.customTableName, filter, attributes);
-								
-	
-	
-
-
-	Sys.Helpers.Database.GetFirstRecordResult (table, filter, attributes, sortorder)
-
-	var filter = "(&(Number__=" + itemNumber + ")(Sales_organization__=" + salesOrganization + ")(Distribution_channel__=" + distributionChannel + "))";
-
-	var attributes = "Z_ProdHierarchy__";
-	var result = Sys.Helpers.Database.GetFirstRecordResult("SO - Materials__", filter, attributes);
-	if (result)
+	"AddOrModifyTableRecord":
 	{
-		var prodHierarchy = result.GetValue_String("Z_ProdHierarchy__", 0);
-		productItem.SetValue("Z_ProdHierarchy__", prodHierarchy);
-		Log.Info("Prod hierarchy", prodHierarchy, "found for item number", itemNumber);
-	}
-	else
+		"description": "Add or modify a table record in server side.",
+		"prefix": ["addormodify","update record", "modify record", "add record"],
+		"body": [
+			"var tableName = \"${0:tableName}\"",
+			"var filter = \"${1:filter}\"",
+			"var attributes = {",
+			"\t{ \"name\": \"${2:tableFieldName1}\", \"value\": ${3:value}}",
+			"};",
+			"",
+			"Sys.Helpers.Database.AddOrModifyTableRecord(tableName, filter, attributes);"
+		]
+	},
+
+	"GetFirstRecordResult":
 	{
-		Log.Warn("No result found.");
+		"description": "Get first record result in server side",
+		"prefix": ["gerfirstrecord","get first record", "first record"],
+		"body": [
+			"var tableName = \"${0:tableName}\"",
+			"var filter = \"${1:filter}\"",
+			"",
+			"var dbResult = Sys.Helpers.Database.GetFirstRecordResult(tableName, filter);",
+			"",
+			"if(dbResult)",
+			"{",
+			"\tvar ${2:field} = dbResult.GetValue_String(\"${2:field}\", 0);",
+			"}",
+			"else",
+			"{",
+			"\tLog.Warn(\"No result found. Table: \" + tableName + \" Filter: \" + filter);",
+			"}",
+		]
+	},
+
+	"RemoveTableRecord":
+	{
+		"description": "Remove table records.",
+		"prefix": ["removetablerecord","remove record", "delete record"],
+		"body": [
+			"var tableName = \"${0:tableName}\"",
+			"var filter = \"${1:filter}\"",
+			"",
+			"Sys.Helpers.Database.RemoveTableRecord(tableName, filter);",
+		]
 	}
-
-
-
-
-	Sys.Helpers.Database.ModifyTableRecord (table, filter, attributes)
-	var tableName = "Z_ComprobantesFEC__";
-
-						var filter = "(&(Z_CUITEmisor__=" + vars.GetValue_String("Z_CUIT_Proveedor__", 0)
-									 + ")(Z_codTipoCmp__=" + codTipoCmp
-									 +")(Z_nroComp__=" + vars.GetValue_String("Z_NumeroFacturaExtraido__", 0) 
-									 + ")(Z_ptoVta__=" + Sys.Helpers.SAP.BuildItemNumber(vars.GetValue_String("Z_Centro__", 0), 5, 1) + "))";
-
-						var itemFieldsToUpdate = [{name: "Z_FechaPago__" ,	value: PaymentDetails.paymentDate }];
-						ModifyTableRecord(tableName, filter, itemFieldsToUpdate);
-
-
-
-
-	Sys.Helpers.Database.RemoveTableRecord
-
-	var tableName = "Z_TaxCodeKeywords__";
-							var filter = "(&(KeyWord__=" + itemData.KeyWord__ + ")(CompanyCode__=" + itemData.CompanyCode__ + ")(VendorNumber__=" + itemData.VendorNumber__ + ")(TaxCode__=" + itemData.TaxCode__ + "))";
-							Sys.Helpers.Database.RemoveTableRecord(tableName, filter);
-
 }
