@@ -80,7 +80,44 @@
 	},
 
 	///////* Queries *///////
-
+	
+	"Generic API Common Query":
+	{
+		"description": "Common query example for server and client side.",
+		"prefix": ["query","common query", "esker", "generic api"],
+		"body": [
+			"//Required GenericAPI.Query parameters",
+			"var queryGenericAPICallback = function(result, error)",
+			"{",
+			"\tif (error)",
+			"\t{",
+			"\t\tLog.Error(\"[CUSTOMIZATION RQ] Query on table '\" + tableName + \"' failed. Details: \" + JSON.stringify(error));",
+			"\t}",
+			"\telse if (result.length == 0)",
+			"\t{",
+			"\t\tLog.Warn(\"[CUSTOMIZATION RQ] Query on table '\" + tableName + \"' without result. filer: \" + filter);",
+			"\t}",
+			"\telse",
+			"\t{",
+			"\t\tfor(var i = 0; i < result.length; i++)",
+			"\t\t{",
+			"\t\t\tvar ${1:attribute1} = result[i][\"${1:attribute1}\"];",
+			"\t\t}",
+			"\t}",
+			"};",
+			"",
+			"var tableName = \"${0:tableName}\";",
+			"var attributes = [\"${1:attribute1}\", \"${2:attribute2}\"];",
+			"var filter = ${3:\"\"};",
+			"",
+			"//Optional GenericAPI.Query parameters",
+			"var sortOrder = ${4:\"\"};",
+			"var maxRecordCount =${5:100};",
+			"var options = ${6:null};",
+			"",
+			"Sys.GenericAPI.Query(tableName, filter, attributes, queryGenericAPICallback, sortOrder, maxRecordCount, options);"
+		]
+	},
 	
 	Sys.Helpers.Database.AddOrModifyTableRecord (table, filter, attributes)
 	
