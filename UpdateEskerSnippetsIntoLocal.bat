@@ -1,10 +1,10 @@
 @echo off
 
-rem Modify parameter "userName" accordingly. The rest should be the same.
-set userName=despi
+rem %APPDATA% Environment variable replace the path C:\Users\%UserName%\AppData\Roaming.
+
 
 set fileName=Esker.code-snippets
 set fromPath=%~dp0%fileName%
-set endPath=C:\Users\%userName%\AppData\Roaming\Code\User\snippets
+set endPath=%APPDATA%\Code\User\snippets
 
 xcopy /y %fromPath% %endPath%
