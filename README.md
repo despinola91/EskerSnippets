@@ -1,6 +1,6 @@
 # Esker Snippets
 
-The main goal of this little project is to provide a usefull package of snippets for Esker developers. 
+The main goal of this little project is to provide a usefull package of [snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets) for Esker developers. 
 This package will save you a lot of time by providing you with many shortcuts for common code structures in Esker such as queries, specific loops and so on.
 
 
