@@ -79,6 +79,28 @@
 		]
 	},
 
+	///////* Comments *//////
+	
+	"Short comment": 
+	{
+		"description": "Short comment",
+		"prefix": ["comment", "short comment", "esker"],
+		"body": ["/* [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number} - ${7:description} */"]
+	},
+
+	"Long comment": 
+	{
+		"description": "Long comment",
+		"prefix": ["comment","long comment","esker"],
+		"body": [
+			"/* [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number}",
+			" * ${7:long description}",
+			" *",
+			" *",
+			" */"
+		]
+	},
+
 	///////* Queries *///////
 	
 	"Generic API Common Query":
