@@ -17,64 +17,34 @@
 	// }
 	
 	///////* Looping form table controls *///////
-	"SOP - Looping materials on server side": 
+	"SOP - Looping materials": 
 	{
-		"description": "Looping materials on server side",
-		"prefix": ["for","loop","query","server query", "esker"],
+		"description": "Looping materials",
+		"prefix": ["for","loop","query", "esker"],
 		"body": [
 			"var materialsTable = Data.GetTable(\"Product_List__\");",
 			"var itemCount = materialsTable.GetItemCount();\n",
 			"for (var i = 0; i < itemCount; i++)",
 			"{",
 			"\t$0var item = materialsTable.GetItem(i);",
-			"\tvar ${1:field} = item.GetValue(${1:field});",
-			"\titem.SetValue(\"${2:field}\", ${3:value});",
+			"\tvar ${1:variable} = item.GetValue(\"${2:field}\");",
+			"\titem.SetValue(\"${3:field}\", ${4:value});",
 			"}"
 		]
 	},
 
-	"SOP - Looping materials on client side": 
-	{
-		"description": "Looping materials on client side",
-		"prefix": ["for","loop","query","client query", "esker"],
-		"body": [
-			"var itemCount = Controls.Product_List__.GetItemCount();",
-			"for (var i = 0; i < itemCount; i++)",
-			"{",
-			"\t$0var item = Controls.Product_List__.GetItem(i);",
-			"\tvar ${1:field} = item.GetValue(\"${1:field}\");",
-			"\tvar ${2:field} = item.SetValue(\"${2:field}\");",
-			"}"
-		]
-	},
-
-	"AP - Looping items on server side":
+	"AP - Looping items":
 	{
 		"description": "Looping line items on server side",
-		"prefix": ["for","loop","query","server query", "esker"],
+		"prefix": ["for","loop","query", "esker"],
 		"body": [
 			"var lineItemsTable = Data.GetTable(\"LineItems__\");",
 			"var itemCount = lineItemsTable.GetItemCount();\n",
 			"for (var i = 0; i < itemCount; i++)",
 			"{",
 			"\t$0var item = lineItemsTable.GetItem(i);",
-			"\tvar ${1:field} = item.GetValue(${1:field});",
-			"\titem.SetValue(\"${2:field}\", ${3:value});",
-			"}"
-		]
-	},
-
-	"AP - Looping items on client side": 
-	{
-		"description": "Looping line items on client side",
-		"prefix": ["for","loop","query","client query", "esker"],
-		"body": [
-			"var itemCount = Controls.LineItems__.GetItemCount();",
-			"for (var i = 0; i < itemCount; i++)",
-			"{",
-			"\t$0var item = Controls.LineItems__.GetItem(i);",
-			"\tvar ${1:field} = item.GetValue(\"${1:field}\");",
-			"\tvar ${2:field} = item.SetValue(\"${2:field}\");",
+			"\tvar ${1:variable} = item.GetValue(\"${2:field}\");",
+			"\titem.SetValue(\"${3:field}\", ${4:value});",
 			"}"
 		]
 	},
@@ -98,6 +68,16 @@
 			" *",
 			" *",
 			" */"
+		]
+	},
+
+	"Start-end comment": 
+	{
+		"description": "Start-end comment",
+		"prefix": ["start end comment", "comment","esker"],
+		"body": [
+			"// Start [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number} ${7:description} ",
+			"// End   [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number}",
 		]
 	},
 
@@ -186,13 +166,16 @@
 	"AddOrModifyTableRecord":
 	{
 		"description": "Add or modify a table record in server side.",
-		"prefix": ["addormodify","update record", "modify record", "add record"],
+		"prefix": ["addormodifytablerecord", "addormodify", "addrecord", "modifyrecord", "query", "esker"],
 		"body": [
+			"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
 			"var tableName = \"${1:tableName}\"",
 			"var filter = \"${2:filter}\"",
-			"var attributes = {",
-			"\t{ \"name\": \"${3:tableFieldName1}\", \"value\": ${4:value}}",
-			"};",
+			"var attributes = [",
+			"\t /* if 'behavior' is incrementNumber then it adds the value to the existing amount in the record */",
+			"\t{ \"name\": \"${3:tableFieldName1}\", \"value\": ${4:value}, behavior: \"incrementNumber\"},",
+			"\t{ \"name\": \"${5:tableFieldName2}\", \"value\": ${6:value}}",
+			"];",
 			"",
 			"Sys.Helpers.Database.AddOrModifyTableRecord(tableName, filter, attributes);"
 		]
