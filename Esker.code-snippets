@@ -219,6 +219,38 @@
 			]
 		},
 
+		"Query.SAPQuery":
+		{
+			"description": "SAP Query at client side.",
+			"prefix": ["sap", "sap query", "query", "client query", "esker"],
+			"body": [
+				"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/sapquery.html\n",
+
+				"function queryCallback()",
+				"{",
+					"\tvar result = \"\";\n",
+
+					"\tif (!this.GetQueryError() && this.GetRecordsCount() > 0)",
+					"\t{",
+						"\t\tresult = this.GetQueryValue(\"BELNR\", 0) + \" \" + this.GetQueryValue(\"GJAHR\", 0);",
+					"\t}",
+				"}\n",
+
+				"var sapConf = Variable.GetValueAsString(\"SAPConfiguration\");",
+				"var table = \"BKPF\";",
+				"var fields = \"BELNR|GJAHR\";",
+				"var options = \"BUKRS = '\" + companyCode + \"' AND GJAHR = '2020'\";\n",				
+				"var rowCount = 1;           //default value -- maximum is 200",
+				"var rowSkip = 0;            //default value",
+				"var noData = false;         //default value",
+				"var withAttributes = false; //default value",
+				"var timeout = 30000;        //default value\n",
+
+				"Query.SAPQuery(queryCallback, sapConf, table, fields, options, rowCount, rowSkip, noData, withAttributes, timeout);"
+			]
+			
+		},
+
 	//#endregion
 	
 }
