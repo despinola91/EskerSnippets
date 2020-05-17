@@ -161,7 +161,7 @@
 					"}\n",
 
 					"var object_to_query = \"myDataTable__\";          // Examples: CD#PHQG20061534 - CDNAME#Customer invoices (customer copy) - myTable__",
-					"var attributes = \"Product_Id__|Product_name__\"; // if \"%FORMATTED\" is added the attribute will be displayed according to the settings (language, time zone, regional settings) of the user executing the HTML page script. Example: "CompletionDateTime%FORMATTED"",
+					"var attributes = \"Product_Id__|Product_name__\"; // if \"%FORMATTED\" is added the attribute will be displayed according to the settings (language, time zone, regional settings) of the user executing the HTML page script. Example: \"CompletionDateTime%FORMATTED\"",
 					"var filter = \"\";                                // Exmple: (&(EmailAddress=*@example.com)(DisplayName=*John*))",
 					"var sort_order = \"Product__ ASC\";               // to sort on several attributes separate by comma: \"VendorName ASC, InvoiceNumber ASC, InvoiceDate DESC\"",
 					"var max_items = 100;                            // default value is 1 and maximum is 100",
