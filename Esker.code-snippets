@@ -16,154 +16,291 @@
 	// 	"description": "Log output to console"
 	// }
 	
-	///////* Looping form table controls *///////
-	"SOP - Looping materials on server side": 
-	{
-		"description": "Looping materials on server side",
-		"prefix": ["for","loop","query","server query", "esker"],
-		"body": [
-			"var materialsTable = Data.GetTable(\"Product_List__\");",
-			"var itemCount = materialsTable.GetItemCount();\n",
-			"for (var i = 0; i < itemCount; i++)",
-			"{",
-			"\t$0var item = materialsTable.GetItem(i);",
-			"\tvar ${1:field} = item.GetValue(${1:field});",
-			"\titem.SetValue(\"${2:field}\", ${3:value});",
-			"}"
-		]
-	},
+	//#region Looping internal form tables
 
-	"SOP - Looping materials on client side": 
-	{
-		"description": "Looping materials on client side",
-		"prefix": ["for","loop","query","client query", "esker"],
-		"body": [
-			"var itemCount = Controls.Product_List__.GetItemCount();",
-			"for (var i = 0; i < itemCount; i++)",
-			"{",
-			"\t$0var item = Controls.Product_List__.GetItem(i);",
-			"\tvar ${1:field} = item.GetValue(\"${1:field}\");",
-			"\tvar ${2:field} = item.SetValue(\"${2:field}\");",
-			"}"
-		]
-	},
+		"SOP - Looping materials": 
+		{
+			"description": "Looping materials",
+			"prefix": ["for","loop","query", "esker"],
+			"body": [
+				"var materialsTable = Data.GetTable(\"Product_List__\");",
+				"var itemCount = materialsTable.GetItemCount();\n",
+				"for (var i = 0; i < itemCount; i++)",
+				"{",
+				"\t$0var item = materialsTable.GetItem(i);",
+				"\tvar ${1:variable} = item.GetValue(\"${2:field}\");",
+				"\titem.SetValue(\"${3:field}\", ${4:value});",
+				"}"
+			]
+		},
 
-	"AP - Looping items on server side":
-	{
-		"description": "Looping line items on server side",
-		"prefix": ["for","loop","query","server query", "esker"],
-		"body": [
-			"var lineItemsTable = Data.GetTable(\"LineItems__\");",
-			"var itemCount = lineItemsTable.GetItemCount();\n",
-			"for (var i = 0; i < itemCount; i++)",
-			"{",
-			"\t$0var item = lineItemsTable.GetItem(i);",
-			"\tvar ${1:field} = item.GetValue(${1:field});",
-			"\titem.SetValue(\"${2:field}\", ${3:value});",
-			"}"
-		]
-	},
+		"AP - Looping items":
+		{
+			"description": "Looping line items on server side",
+			"prefix": ["for","loop","query", "esker"],
+			"body": [
+				"var lineItemsTable = Data.GetTable(\"LineItems__\");",
+				"var itemCount = lineItemsTable.GetItemCount();\n",
+				"for (var i = 0; i < itemCount; i++)",
+				"{",
+				"\t$0var item = lineItemsTable.GetItem(i);",
+				"\tvar ${1:variable} = item.GetValue(\"${2:field}\");",
+				"\titem.SetValue(\"${3:field}\", ${4:value});",
+				"}"
+			]
+		},
 
-	"AP - Looping items on client side": 
-	{
-		"description": "Looping line items on client side",
-		"prefix": ["for","loop","query","client query", "esker"],
-		"body": [
-			"var itemCount = Controls.LineItems__.GetItemCount();",
-			"for (var i = 0; i < itemCount; i++)",
-			"{",
-			"\t$0var item = Controls.LineItems__.GetItem(i);",
-			"\tvar ${1:field} = item.GetValue(\"${1:field}\");",
-			"\tvar ${2:field} = item.SetValue(\"${2:field}\");",
-			"}"
-		]
-	},
+	//#endregion
 
-	///////* Queries *///////
+	//#region Comments
+
+		"Short comment": 
+		{
+			"description": "Short comment",
+			"prefix": ["comment", "short comment", "esker"],
+			"body": ["/* [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number} - ${7:description} */"]
+		},
+
+		"Long comment": 
+		{
+			"description": "Long comment",
+			"prefix": ["comment","long comment","esker"],
+			"body": [
+				"/* [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number}",
+				" * ${7:long description}",
+				" *",
+				" *",
+				" */"
+			]
+		},
+
+		"Start-end comment": 
+		{
+			"description": "Start-end comment",
+			"prefix": ["start end comment", "comment","esker"],
+			"body": [
+				"// Start [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number} ${7:description} ",
+				"// End   [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number}",
+			]
+		},
+
+	//#endregion
+
+	//#region Queries
+
+		"Generic API Common Query":
+		{
+			"description": "Common query example for server and client side.",
+			"prefix": ["query","common query", "esker", "generic api"],
+			"body": [
+				"//Required GenericAPI.Query parameters",
+				"var queryGenericAPICallback = function(result, error)",
+				"{",
+				"\tif (error)",
+				"\t{",
+				"\t\tLog.Error(\"[CUSTOMIZATION RQ] Query on table '\" + tableName + \"' failed. Details: \" + JSON.stringify(error));",
+				"\t}",
+				"\telse if (result.length == 0)",
+				"\t{",
+				"\t\tLog.Warn(\"[CUSTOMIZATION RQ] Query on table '\" + tableName + \"' without result. filer: \" + filter);",
+				"\t}",
+				"\telse",
+				"\t{",
+				"\t\tfor(var i = 0; i < result.length; i++)",
+				"\t\t{",
+				"\t\t\tvar ${2:attribute1} = result[i][\"${2:attribute1}\"];",
+				"\t\t}",
+				"\t}",
+				"};",
+				"",
+				"var tableName = \"${1:tableName}\";",
+				"var attributes = [\"${2:attribute1}\", \"${3:attribute2}\"];",
+				"var filter = ${4:\"\"};",
+				"",
+				"//Optional GenericAPI.Query parameters",
+				"var sortOrder = ${5:\"\"};",
+				"var maxRecordCount =${6:100};",
+				"var options = ${7:null};",
+				"",
+				"Sys.GenericAPI.Query(tableName, filter, attributes, queryGenericAPICallback, sortOrder, maxRecordCount, options);"
+			]
+		},
+
+		"Process Query Example":
+		{
+			"description": "Example structure of the process instances query. Only server side.",
+			"prefix": ["process query","instances queries", "message queries"],
+			"body": [
+				"var processName = \"${1:processName}\"",
+				"var filter = \"${2:filter}\"",
+				"var query = Process.CreateQueryAsProcessAdmin();",
+				"query.SetSpecificTable(\"CDNAME#\" + processName);",
+				"query.AddAttribute(\"${3:attribute1}\");",
+				"query.SetSearchInArchive({4:boolean});",
+				"query.SetFilter(filter);",
+				"",
+				"if(query.MoveFirst())",
+				"{",
+					"\tvar eodTransport = query.MoveNext();",
+					"\t",
+					"\tif(!eodTransport)",
+					"\t{",
+						"\t\tLog.Warn(\"[CUSTOMIZATION RQ] MoveNext to '\" + processName + \"' failed: \" + query.GetLastErrorMessage());",
+					"\t}",
+					"\t",
+					"\twhile(eodTransport)",
+					"\t{",
+						"\t\tvar vars = eodTransport.GetUninheritedVars();",
+						"\t\tvar externalVariables = eodTransport.GetExternalVars();",
+						"\t\t",
+						"\t\tvar ${3:attribute1} = vars.GetValue_String(\"${3:attribute1}\", 0);",
+						"\t\tvar ${5:externalVariable1} = externalVariables.GetValue_String(\"${5:externalVariable1}\", 0);",
+						"\t\t",
+						"\t\t//Do the corresponding logic for each record here.",
+						"\t\t",
+						"\t\tvar eodTransport = query.MoveNext();",
+					"\t}",
+				"}",
+				"else",
+				"{",
+					"\tLog.Warn(\"[CUSTOMIZATION RQ] MoveFirst to '\" + processName + \"' failed. Error message: \" + query.GetLastErrorMessage());",
+				"}"
+			]	
+		},
+		
+		"AddOrModifyTableRecord":
+		{
+			"description": "Add or modify a table record in server side.",
+			"prefix": ["addormodifytablerecord", "addormodify", "addrecord", "modifyrecord", "query", "esker"],
+			"body": [
+				"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
+				"var tableName = \"${1:tableName}\"",
+				"var filter = \"${2:filter}\"",
+				"var attributes = [",
+				"\t /* if 'behavior' is incrementNumber then it adds the value to the existing amount in the record */",
+				"\t{ \"name\": \"${3:tableFieldName1}\", \"value\": ${4:value}, behavior: \"incrementNumber\"},",
+				"\t{ \"name\": \"${5:tableFieldName2}\", \"value\": ${6:value}}",
+				"];",
+				"",
+				"Sys.Helpers.Database.AddOrModifyTableRecord(tableName, filter, attributes);"
+			]
+		},
+
+		"GetFirstRecordResult":
+		{
+			"description": "Get first record result in server side",
+			"prefix": ["gerfirstrecord","get first record", "first record"],
+			"body": [
+				"var tableName = \"${1:tableName}\"",
+				"var filter = \"${2:filter}\"",
+				"",
+				"var dbResult = Sys.Helpers.Database.GetFirstRecordResult(tableName, filter);",
+				"",
+				"if(dbResult)",
+				"{",
+				"\tvar ${3:field} = dbResult.GetValue_String(\"${3:field}\", 0);",
+				"}",
+				"else",
+				"{",
+				"\tLog.Warn(\"[CUSTOMIZATION RQ] No result found. Table: \" + tableName + \" Filter: \" + filter);",
+				"}",
+			]
+		},
+
+		"RemoveTableRecord":
+		{
+			"description": "Remove table records.",
+			"prefix": ["removetablerecord","remove record", "delete record"],
+			"body": [
+				"var tableName = \"${1:tableName}\"",
+				"var filter = \"${2:filter}\"",
+				"",
+				"Sys.Helpers.Database.RemoveTableRecord(tableName, filter);",
+			]
+		},
+
+		"Query.SAPQuery":
+		{
+			"description": "SAP Query at client side.",
+			"prefix": ["sap", "sap query", "query", "client query", "esker"],
+			"body": [
+				"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/sapquery.html\n",
+
+				"function queryCallback()",
+				"{",
+					"\tvar result = \"\";\n",
+
+					"\tif (!this.GetQueryError() && this.GetRecordsCount() > 0)",
+					"\t{",
+						"\t\tresult = this.GetQueryValue(\"BELNR\", 0) + \" \" + this.GetQueryValue(\"GJAHR\", 0);",
+					"\t}",
+				"}\n",
+
+				"var sapConf = Variable.GetValueAsString(\"SAPConfiguration\");",
+				"var table = \"BKPF\";",
+				"var fields = \"BELNR|GJAHR\";",
+				"var options = \"BUKRS = '\" + companyCode + \"' AND GJAHR = '2020'\";\n",				
+				"var rowCount = 1;           //default value -- maximum is 200",
+				"var rowSkip = 0;            //default value",
+				"var noData = false;         //default value",
+				"var withAttributes = false; //default value",
+				"var timeout = 30000;        //default value\n",
+
+				"Query.SAPQuery(queryCallback, sapConf, table, fields, options, rowCount, rowSkip, noData, withAttributes, timeout);"
+			]
+			
+		},
+
+		"Query.DBQuery":
+		{
+			"description": "Query.DBQuery [client]",
+			"prefix": ["dbquery", "query", "client query", "esker"],
+			"body": [
+				"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/DBQuery.html\n",
+
+				"function query_callback()",
+				"{",
+					"\tvar err = this.GetQueryError();",
+					"\tif (err)",
+					"\t{",
+						"\t\tPopup.Alert(err);",
+					"\t}",
+					"\telse",
+					"\t{",    
+						"\t\tvar recordsCount = this.GetRecordsCount();",
+						"\t\tvar item;",
+						"\t\tvar tableItem = Data.GetTable(\"LineItemTable__\");",
+						"\t\tvar idFromRecord;",
+						"\t\tvar nameFromRecord;\n",
+								
+						"\t\t// Parse the retrieved records",
+						"\t\tfor (var i=0 ; i < recordsCount ; i++)",
+						"\t\t{",   
+							"\t\t\t// For each record, retrieve the attribute value...",
+							"\t\t\tidFromRecord = this.GetQueryValue(\"Product_Id__\", i);",             
+							"\t\t\tnameFromRecord = this.GetQueryValue(\"Product_Name__\", i);\n",                                     
+							
+							"\t\t\t// Fill the table with the retrieved values",
+							"\t\t\titem=tableItem.GetItem(i); // Gets the current line.",
+							"\t\t\titem.SetValue(\"Product_Id__\",idFromRecord);",        
+							"\t\t\titem.SetValue(\"Product_Name__\",nameFromRecord);",        
+							"\t\t\ttableItem.AddItem(false); // Creates a new line in the table.",
+						"\t\t}",
+					"\t}",
+				"}\n",
+
+				"var object_to_query = \"myDataTable__\";          // Examples: CD#PHQG20061534 - CDNAME#Customer invoices (customer copy) - myTable__",
+				"var attributes = \"Product_Id__|Product_name__\"; // if \"%FORMATTED\" is added the attribute will be displayed according to the settings (language, time zone, regional settings) of the user executing the HTML page script. Example: "CompletionDateTime%FORMATTED"",
+				"var filter = \"\";                                // Exmple: (&(EmailAddress=*@example.com)(DisplayName=*John*))",
+				"var sort_order = \"Product__ ASC\";               // to sort on several attributes separate by comma: \"VendorName ASC, InvoiceNumber ASC, InvoiceDate DESC\"",
+				"var max_items = 100;                            // default value is 1 and maximum is 100",
+				"var callback_instance = null;                   // default value",
+				"var options = null;                             // interesting option: Distinct=1 allos you to retrieve distinct elements only\n",
+
+				"Query.DBQuery(query_callback, object_to_query, attributes, filter, sort_order, max_items, callback_instance, options);",
+			]
+		}
+
+	//#endregion
 	
-	"Generic API Common Query":
-	{
-		"description": "Common query example for server and client side.",
-		"prefix": ["query","common query", "esker", "generic api"],
-		"body": [
-			"//Required GenericAPI.Query parameters",
-			"var queryGenericAPICallback = function(result, error)",
-			"{",
-			"\tif (error)",
-			"\t{",
-			"\t\tLog.Error(\"[CUSTOMIZATION RQ] Query on table '\" + tableName + \"' failed. Details: \" + JSON.stringify(error));",
-			"\t}",
-			"\telse if (result.length == 0)",
-			"\t{",
-			"\t\tLog.Warn(\"[CUSTOMIZATION RQ] Query on table '\" + tableName + \"' without result. filer: \" + filter);",
-			"\t}",
-			"\telse",
-			"\t{",
-			"\t\tfor(var i = 0; i < result.length; i++)",
-			"\t\t{",
-			"\t\t\tvar ${1:attribute1} = result[i][\"${1:attribute1}\"];",
-			"\t\t}",
-			"\t}",
-			"};",
-			"",
-			"var tableName = \"${0:tableName}\";",
-			"var attributes = [\"${1:attribute1}\", \"${2:attribute2}\"];",
-			"var filter = ${3:\"\"};",
-			"",
-			"//Optional GenericAPI.Query parameters",
-			"var sortOrder = ${4:\"\"};",
-			"var maxRecordCount =${5:100};",
-			"var options = ${6:null};",
-			"",
-			"Sys.GenericAPI.Query(tableName, filter, attributes, queryGenericAPICallback, sortOrder, maxRecordCount, options);"
-		]
-	},
-	
-	"AddOrModifyTableRecord":
-	{
-		"description": "Add or modify a table record in server side.",
-		"prefix": ["addormodify","update record", "modify record", "add record"],
-		"body": [
-			"var tableName = \"${0:tableName}\"",
-			"var filter = \"${1:filter}\"",
-			"var attributes = {",
-			"\t{ \"name\": \"${2:tableFieldName1}\", \"value\": ${3:value}}",
-			"};",
-			"",
-			"Sys.Helpers.Database.AddOrModifyTableRecord(tableName, filter, attributes);"
-		]
-	},
-
-	"GetFirstRecordResult":
-	{
-		"description": "Get first record result in server side",
-		"prefix": ["gerfirstrecord","get first record", "first record"],
-		"body": [
-			"var tableName = \"${0:tableName}\"",
-			"var filter = \"${1:filter}\"",
-			"",
-			"var dbResult = Sys.Helpers.Database.GetFirstRecordResult(tableName, filter);",
-			"",
-			"if(dbResult)",
-			"{",
-			"\tvar ${2:field} = dbResult.GetValue_String(\"${2:field}\", 0);",
-			"}",
-			"else",
-			"{",
-			"\tLog.Warn(\"No result found. Table: \" + tableName + \" Filter: \" + filter);",
-			"}",
-		]
-	},
-
-	"RemoveTableRecord":
-	{
-		"description": "Remove table records.",
-		"prefix": ["removetablerecord","remove record", "delete record"],
-		"body": [
-			"var tableName = \"${0:tableName}\"",
-			"var filter = \"${1:filter}\"",
-			"",
-			"Sys.Helpers.Database.RemoveTableRecord(tableName, filter);",
-		]
-	}
 }
