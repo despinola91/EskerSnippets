@@ -92,8 +92,8 @@
 
 			"Query.SAPQuery":
 			{
-				"description": "SAP Query at client side.",
-				"prefix": ["sap", "sap query", "query", "client query", "esker"],
+				"description": "Query.SAPQuery [client]",
+				"prefix": ["query.sapquery", "sap", "sap query", "query", "client query", "esker query", "esker"],
 				"body": [
 					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/sapquery.html\n",
 
@@ -125,7 +125,7 @@
 			"Query.DBQuery":
 			{
 				"description": "Query.DBQuery [client]",
-				"prefix": ["dbquery", "query", "client query", "esker"],
+				"prefix": ["query.dbquery", "dbquery", "query", "client query", "esker query", "esker"],
 				"body": [
 					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/DBQuery.html\n",
 
@@ -218,10 +218,10 @@
 				]	
 			},
 
-			"AddOrModifyTableRecord":
+			"Sys.Helpers.Database.AddOrModifyTableRecord":
 			{
-				"description": "Add or modify a table record in server side.",
-				"prefix": ["addormodifytablerecord", "addormodify", "addrecord", "modifyrecord", "query", "esker"],
+				"description": "Sys.Helpers.Database.AddOrModifyTableRecord [server]",
+				"prefix": ["sys.helpers.database.addormodifytablerecord", "addormodify", "addrecord", "modifyrecord", "esker query", "server query", "query", "esker"],
 				"body": [
 					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
 					"var tableName = \"${1:tableName}\"",
@@ -236,11 +236,12 @@
 				]
 			},
 
-			"GetFirstRecordResult":
+			"Sys.Helpers.Database.GetFirstRecordResult":
 			{
-				"description": "Get first record result in server side",
-				"prefix": ["gerfirstrecord","get first record", "first record"],
+				"description": "Sys.Helpers.Database.GetFirstRecordResult [server]",
+				"prefix": ["sys.helpers.database.getfirstrecordresult", "gerfirstrecord", "get first record", "first record", "esker query", "server query", "query", "esker"],
 				"body": [
+					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
 					"var tableName = \"${1:tableName}\"",
 					"var filter = \"${2:filter}\"",
 					"",
@@ -257,11 +258,12 @@
 				]
 			},
 
-			"RemoveTableRecord":
+			"Sys.Helpers.Database.RemoveTableRecord":
 			{
-				"description": "Remove table records.",
-				"prefix": ["removetablerecord","remove record", "delete record"],
+				"description": "Sys.Helpers.Database.RemoveTableRecord [server]",
+				"prefix": ["sys.herlpers.database.removetablerecord", "removetablerecord", "remove record", "delete record", "esker query", "server query", "query", "esker"],
 				"body": [
+					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
 					"var tableName = \"${1:tableName}\"",
 					"var filter = \"${2:filter}\"",
 					"",
@@ -273,10 +275,10 @@
 		
 		//#region Both sides
 
-			"Generic API Common Query":
+			"Sys.GenericAPI.Query":
 			{
-				"description": "Common query example for server and client side.",
-				"prefix": ["query","common query", "esker", "generic api"],
+				"description": "Sys.GenericAPI.Query [client side]",
+				"prefix": ["sys.genericapi.query", "genericapi", "generic api", "query", "common query", "esker"],
 				"body": [
 					"//Required GenericAPI.Query parameters",
 					"var queryGenericAPICallback = function(result, error)",
