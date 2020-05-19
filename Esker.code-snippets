@@ -176,44 +176,52 @@
 
 		//#region Server side
 
-			"Process Query Example":
+			"Process.CreateQueryAsProcessAdmin":
 			{
-				"description": "Example structure of the process instances query. Only server side.",
-				"prefix": ["process query","instances queries", "message queries"],
+				"description": "Process.CreateQueryAsProcessAdmin [server]",
+				"prefix": ["createqueryasprocessadmin", "esker query", "process query", "esker", "createquery", "server query", "query"],
 				"body": [
-					"var processName = \"${1:processName}\"",
-					"var filter = \"${2:filter}\"",
-					"var query = Process.CreateQueryAsProcessAdmin();",
-					"query.SetSpecificTable(\"CDNAME#\" + processName);",
-					"query.AddAttribute(\"${3:attribute1}\");",
-					"query.SetSearchInArchive({4:boolean});",
-					"query.SetFilter(filter);",
-					"",
-					"if(query.MoveFirst())",
-					"{",
-						"\tvar eodTransport = query.MoveNext();",
-						"\t",
-						"\tif(!eodTransport)",
+					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#processingscripts/process/createqueryasprocessadmin.html?Highlight=Query\n",
+					"var filter = \"(&(CompanyCode__=US01)(CostCenter__=1240)(Glaccount__=8300)(PeriodCode__=FY2015))\";\n",
+ 
+ 					"var processQuery = Process.CreateQueryAsProcessAdmin();",
+					"processQuery.SetSpecificTable(\"PurchasingBudget__\");",
+					"processQuery.SetFilter(filter);\n",
+					
+					"if (processQuery.MoveFirst())",
+					"{\n",
+					
+						"\tvar record = processQuery.MoveNextRecord();",
+						"\tif (record)",
 						"\t{",
-							"\t\tLog.Warn(\"[CUSTOMIZATION RQ] MoveNext to '\" + processName + \"' failed: \" + query.GetLastErrorMessage());",
+							"\t\tLog.Info(\"Found record\");\n",
+					
+							"\t\tvar vars = record.GetVars();",
+							"\t\tvar total = vars.GetValue_Double(\"Budget__\", 0);\n",
+					
+							"\t\tLog.Info(\"Current budget is: \" + total);\n",
+					
+							"\t\ttotal++;",
+							"\t\tLog.Info(\"Increment budget to: \" + total);\n",
+					
+							"\t\tvars.AddValue_Double(\"Budget__\", total, true);\n",
+					
+							"\t\t// Commit changes",
+							"\t\trecord.Commit();\n",
+
+							"\t\tif (record.GetLastError())",
+							"\t\t{",
+								"\t\t\tLog.Info(\"Commit did not work: \" + processQuery.GetLastErrorMessage());",
+							"\t\t}",
 						"\t}",
-						"\t",
-						"\twhile(eodTransport)",
+						"\telse",
 						"\t{",
-							"\t\tvar vars = eodTransport.GetUninheritedVars();",
-							"\t\tvar externalVariables = eodTransport.GetExternalVars();",
-							"\t\t",
-							"\t\tvar ${3:attribute1} = vars.GetValue_String(\"${3:attribute1}\", 0);",
-							"\t\tvar ${5:externalVariable1} = externalVariables.GetValue_String(\"${5:externalVariable1}\", 0);",
-							"\t\t",
-							"\t\t//Do the corresponding logic for each record here.",
-							"\t\t",
-							"\t\tvar eodTransport = query.MoveNext();",
+							"\t\tLog.Info(\"No record found !\");",
 						"\t}",
 					"}",
 					"else",
 					"{",
-						"\tLog.Warn(\"[CUSTOMIZATION RQ] MoveFirst to '\" + processName + \"' failed. Error message: \" + query.GetLastErrorMessage());",
+						"\tLog.Info(\"MoveFirst does not work: \" + processQuery.GetLastErrorMessage());",
 					"}"
 				]	
 			},
