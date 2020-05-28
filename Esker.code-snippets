@@ -58,7 +58,7 @@
 		{
 			"description": "Short comment",
 			"prefix": ["comment", "short comment", "esker"],
-			"body": ["/* [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number} - ${7:description} */"]
+			"body": ["$BLOCK_COMMENT_START [${1:author} $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE] T-${5:ticket number} - ${7:description} $BLOCK_COMMENT_END"]
 		},
 
 		"Long comment": 
@@ -66,11 +66,11 @@
 			"description": "Long comment",
 			"prefix": ["comment","long comment","esker"],
 			"body": [
-				"/* [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number}",
-				" * ${7:long description}",
-				" *",
-				" *",
-				" */"
+				"$BLOCK_COMMENT_START [${1:author} $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE] T-${5:ticket number}",
+				"* ${7:long description}",
+				"*",
+				"*",
+				"$BLOCK_COMMENT_END"
 			]
 		},
 
@@ -79,8 +79,8 @@
 			"description": "Start-end comment",
 			"prefix": ["start end comment", "comment","esker"],
 			"body": [
-				"// Start [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number} ${7:description} ",
-				"// End   [${1:author} ${2:year}-${3:month}-${4:date}] T-${5:ticket number} ST-${6:user story number}",
+				"$BLOCK_COMMENT_START Start [${1:author} $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE] T-${5:ticket number} ${7:description} $BLOCK_COMMENT_END",
+				"$BLOCK_COMMENT_START End   [${1:author} $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE] T-${5:ticket number} ${7:description} $BLOCK_COMMENT_END"
 			]
 		},
 
