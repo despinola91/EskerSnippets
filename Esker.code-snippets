@@ -320,7 +320,7 @@
 					"",
 					"Sys.GenericAPI.Query(tableName, filter, attributes, queryGenericAPICallback, sortOrder, maxRecordCount, options);"
 				]
-			},
+			}
 		
 		//#endregion
 
