@@ -95,7 +95,7 @@
 				"description": "Query.SAPQuery [client]",
 				"prefix": ["query.sapquery", "sap", "sap query", "query", "client query", "esker query", "esker"],
 				"body": [
-					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/sapquery.html\n",
+					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/sapquery.html */ \n",
 
 					"function queryCallback()",
 					"{",
@@ -127,7 +127,7 @@
 				"description": "Query.DBQuery [client]",
 				"prefix": ["query.dbquery", "dbquery", "query", "client query", "esker query", "esker"],
 				"body": [
-					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/DBQuery.html\n",
+					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/DBQuery.html */ \n",
 
 					"function query_callback()",
 					"{",
@@ -181,7 +181,7 @@
 				"description": "Process.CreateQueryAsProcessAdmin [server]",
 				"prefix": ["createqueryasprocessadmin", "esker query", "process query", "esker", "createquery", "server query", "query"],
 				"body": [
-					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#processingscripts/process/createqueryasprocessadmin.html?Highlight=Query\n",
+					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#processingscripts/process/createqueryasprocessadmin.html?Highlight=Query */ \n",
 					"var filter = \"(&(CompanyCode__=US01)(CostCenter__=1240)(Glaccount__=8300)(PeriodCode__=FY2015))\";\n",
  
  					"var processQuery = Process.CreateQueryAsProcessAdmin();",
@@ -288,7 +288,7 @@
 				"description": "Sys.GenericAPI.Query [client side]",
 				"prefix": ["sys.genericapi.query", "genericapi", "generic api", "query", "common query", "esker"],
 				"body": [
-					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html\n",
+					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
 					"//Required GenericAPI.Query parameters",
 					"var queryGenericAPICallback = function(result, error)",
 					"{",
