@@ -95,7 +95,7 @@
 				"description": "Query.SAPQuery [client]",
 				"prefix": ["query.sapquery", "sap", "sap query", "query", "client query", "esker query", "esker"],
 				"body": [
-					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/sapquery.html\n",
+					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/sapquery.html */ \n",
 
 					"function queryCallback()",
 					"{",
@@ -127,7 +127,7 @@
 				"description": "Query.DBQuery [client]",
 				"prefix": ["query.dbquery", "dbquery", "query", "client query", "esker query", "esker"],
 				"body": [
-					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/DBQuery.html\n",
+					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#htmlpagescript/query/DBQuery.html */ \n",
 
 					"function query_callback()",
 					"{",
@@ -168,7 +168,7 @@
 					"var callback_instance = null;                   // default value",
 					"var options = null;                             // interesting option: Distinct=1 allos you to retrieve distinct elements only\n",
 
-					"Query.DBQuery(query_callback, object_to_query, attributes, filter, sort_order, max_items, callback_instance, options);",
+					"Query.DBQuery(query_callback, object_to_query, attributes, filter, sort_order, max_items, callback_instance, options);"
 				]
 			},
 
@@ -181,7 +181,7 @@
 				"description": "Process.CreateQueryAsProcessAdmin [server]",
 				"prefix": ["createqueryasprocessadmin", "esker query", "process query", "esker", "createquery", "server query", "query"],
 				"body": [
-					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#processingscripts/process/createqueryasprocessadmin.html?Highlight=Query\n",
+					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#processingscripts/process/createqueryasprocessadmin.html?Highlight=Query */ \n",
 					"var filter = \"(&(CompanyCode__=US01)(CostCenter__=1240)(Glaccount__=8300)(PeriodCode__=FY2015))\";\n",
  
  					"var processQuery = Process.CreateQueryAsProcessAdmin();",
@@ -262,7 +262,7 @@
 					"else",
 					"{",
 					"\tLog.Warn(\"[CUSTOMIZATION RQ] No result found. Table: \" + tableName + \" Filter: \" + filter);",
-					"}",
+					"}"
 				]
 			},
 
@@ -275,7 +275,7 @@
 					"var tableName = \"${1:tableName}\"",
 					"var filter = \"${2:filter}\"",
 					"",
-					"Sys.Helpers.Database.RemoveTableRecord(tableName, filter);",
+					"Sys.Helpers.Database.RemoveTableRecord(tableName, filter);"
 				]
 			},
 
@@ -288,7 +288,7 @@
 				"description": "Sys.GenericAPI.Query [client side]",
 				"prefix": ["sys.genericapi.query", "genericapi", "generic api", "query", "common query", "esker"],
 				"body": [
-					"https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html\n",
+					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
 					"//Required GenericAPI.Query parameters",
 					"var queryGenericAPICallback = function(result, error)",
 					"{",
@@ -320,7 +320,7 @@
 					"",
 					"Sys.GenericAPI.Query(tableName, filter, attributes, queryGenericAPICallback, sortOrder, maxRecordCount, options);"
 				]
-			},
+			}
 		
 		//#endregion
 
