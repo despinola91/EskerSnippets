@@ -232,8 +232,8 @@
 				"prefix": ["sys.helpers.database.addormodifytablerecord", "addormodify", "addrecord", "modifyrecord", "esker query", "server query", "query", "esker"],
 				"body": [
 					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
-					"var tableName = \"${1:tableName}\"",
-					"var filter = \"${2:filter}\"",
+					"var tableName = \"${1:tableName}\";",
+					"var filter = \"${2:filter}\";",
 					"var attributes = [",
 					"\t /* if 'behavior' is incrementNumber then it adds the value to the existing amount in the record */",
 					"\t{ \"name\": \"${3:tableFieldName1}\", \"value\": ${4:value}, behavior: \"incrementNumber\"},",
@@ -250,8 +250,8 @@
 				"prefix": ["sys.helpers.database.getfirstrecordresult", "gerfirstrecord", "get first record", "first record", "esker query", "server query", "query", "esker"],
 				"body": [
 					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
-					"var tableName = \"${1:tableName}\"",
-					"var filter = \"${2:filter}\"",
+					"var tableName = \"${1:tableName}\";",
+					"var filter = \"${2:filter}\";",
 					"",
 					"var dbResult = Sys.Helpers.Database.GetFirstRecordResult(tableName, filter);",
 					"",
@@ -272,8 +272,8 @@
 				"prefix": ["sys.herlpers.database.removetablerecord", "removetablerecord", "remove record", "delete record", "esker query", "server query", "query", "esker"],
 				"body": [
 					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
-					"var tableName = \"${1:tableName}\"",
-					"var filter = \"${2:filter}\"",
+					"var tableName = \"${1:tableName}\";",
+					"var filter = \"${2:filter}\";",
 					"",
 					"Sys.Helpers.Database.RemoveTableRecord(tableName, filter);"
 				]
@@ -289,7 +289,6 @@
 				"prefix": ["sys.genericapi.query", "genericapi", "generic api", "query", "common query", "esker"],
 				"body": [
 					"/* https://docptn.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#libraries/index.html */ \n",
-					"//Required GenericAPI.Query parameters",
 					"var queryGenericAPICallback = function(result, error)",
 					"{",
 					"\tif (error)",
@@ -315,7 +314,7 @@
 					"",
 					"//Optional GenericAPI.Query parameters",
 					"var sortOrder = ${5:\"\"};",
-					"var maxRecordCount =${6:100};",
+					"var maxRecordCount = ${6:100};",
 					"var options = ${7:null};",
 					"",
 					"Sys.GenericAPI.Query(tableName, filter, attributes, queryGenericAPICallback, sortOrder, maxRecordCount, options);"
