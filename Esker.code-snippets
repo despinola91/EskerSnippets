@@ -74,9 +74,9 @@
 			]
 		},
 
-		"Start-end comment": 
+		"Start&end comment": 
 		{
-			"description": "Start-end comment",
+			"description": "Start&end comment",
 			"prefix": ["start end comment", "comment","esker"],
 			"body": [
 				"$BLOCK_COMMENT_START Start [${1:author} $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE] T-${2:ticket number} ST-${3:story number} ${4:description} $BLOCK_COMMENT_END",
