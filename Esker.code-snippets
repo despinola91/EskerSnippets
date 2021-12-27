@@ -345,6 +345,15 @@
 				]	
 			},
 
+			"Process.CreateHttpRequest":
+			{
+				"description": "Process.CreateHttpRequest [server]",
+				"prefix": ["createhttprequest", "esker query", "http query", "esker", "http request", "server", "web service call"],
+				"body": [
+					"/* https://doc.esker.com/eskerondemand/cv_ly/en/manager/startpage.htm#processingscripts/Process/CreateHttpRequest.html */ \n",
+				]
+			},
+
 			"Sys.Helpers.Database.AddOrModifyTableRecord":
 			{
 				"description": "Sys.Helpers.Database.AddOrModifyTableRecord [server]",
