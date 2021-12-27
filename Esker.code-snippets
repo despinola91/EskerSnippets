@@ -49,23 +49,6 @@
 				"}"
 			]
 		},
-		"Delete row": 
-		{
-			"description": "Delete row",
-			"prefix": ["delete","row","esker","row delete","delete row"],
-			"body": [
-				"var table = Data.GetTable(\"${1:tableName}\");",
-				"var itemsCount = table.GetItemCount();",
-				"for (var i = 0; i <= itemsCount; i++)",
-				"{",
-				"\tif(table.GetItem(i).GetValue(\"${2:value}\") === \"${3:field}\")",
-				"\t{",
-				"\t\ttable.GetItem(i).Remove();",
-				"\t\tbreak;",
-				"\t}",
-				"}"
-			]
-		},
 
 	//#endregion
 
